@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>管理系统</title>
+
+<!-- BOOTSTRAP STYLES-->
+<link href="./css/bootstrap.css" rel="stylesheet" />
+<!-- FONTAWESOME STYLES-->
+<link href="./css/font-awesome.css" rel="stylesheet" />
+<!--CUSTOM BASIC STYLES-->
+<link href="./css/basic.css" rel="stylesheet" />
+<!--CUSTOM MAIN STYLES-->
+<link href="./css/custom.css" rel="stylesheet" />
+<link href="./css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="./css/bootstrap-datetimepicker.css" rel="stylesheet" />
+<style type="text/css">
+.navbar-brand {
+	color: #fff;
+}
+
+.navbar-default .navbar-brand {
+	color: #fff;
+}
+
+.navbar-default .navbar-brand:hover,.navbar-default .navbar-brand:focus
+	{
+	color: #fff;
+	background-color: transparent;
+}
+</style>
+<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+<!-- JQUERY SCRIPTS -->
+<script src="./js/jquery.js"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="./js/bootstrap.js"></script>
+<!-- METISMENU SCRIPTS -->
+<script src="./js/jquery.metisMenu.js"></script>
+<!-- CUSTOM SCRIPTS -->
+<script src="./js/custom.js"></script>
+<script type="text/javascript" src="./js/jBootstrapPage.js"></script>
+<script type="text/javascript" src="./js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="./js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="./js/util.js"></script>
+<script src="./js/index.js"></script>
+<script src="./js/alarmforAdmin.js"></script>
+<script src="./js/cookie_util.js"></script>
+<style type="text/css">
+.table_header {
+	text-align: center;
+}
+
+.table_header td {
+	background: #DCE9F2;
+	padding: 5px 10px;
+	color: rgb(70, 122, 167);
+	border-top: 1px solid #CBD6DE;
+	border-bottom: 1px solid #ADBECB;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.inputPage {
+	width: 34px;
+	height: 28px;
+}
+
+.pages {
+	color: #666666;
+}
+
+.modalcolor {
+	color: #337AB7;
+}
+</style>
+<script type="text/javascript">
+	var isSearch = false;
+	$(function() {
+		indexFns();
+		alarmFns();
+		
+	});
+	
+
+</script>
+</head>
+<body ng-controller="mainController">
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-cls-top " role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">入侵报警系统管理系统</a>
+			</div>
+			<div class="header-right">
+				<div class="dropdown">
+
+					<!--  
+				<a href="#adminmenu" class="btn btn-info dropdown-toggle"
+					title="Logout" data-toggle="dropdown"><i
+					class="glyphicon glyphicon-user"></i>
+				</a>
+				-->
+					<button class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+						id="adminmenu" aria-expanded="true">
+						<i class="glyphicon glyphicon-user"></i>
+					</button>
+
+					<ul class="dropdown-menu dropdown-menu-right" role="menu"
+						aria-labelledby="adminmenu">
+						<li><a href="JavaScript:void(0);" onclick="aLogOut()">安全退出</a></li>
+					</ul>
+				</div>
+
+			</div>
+
+		</nav>
+		<!-- /. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li><a href="usercheck.html"><i
+									class="glyphicon glyphicon-eye-open"></i>用户审核</a></li>
+							<li><a href="userall.html" ><i
+									class="glyphicon glyphicon-sunglasses"></i>所有用户</a></li>
+							<li><a href="userimport.html"><i
+									class="glyphicon glyphicon-star"></i>重点用户</a></li>
+						
+					
+						
+							<li><a href="question.html"><i
+									class="glyphicon glyphicon-hand-right"></i>用户反馈</a></li>
+							<li><a href="anotice.html" ><i
+									class="glyphicon glyphicon-bullhorn "></i>公告管理</a></li>
+							<li><a href="alarmmsgs.html" class="active-menu"><i
+									class="glyphicon glyphicon-hand-right"></i>报警信息</a></li>
+				</ul>
+
+			</div>
+
+		</nav>
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+
+			<div id="page-inner">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="page-head-line">消息管理</h1>
+						<h1 class="page-subhead-line">报警信息</h1>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<div class="row">
+					<div class="col-md-4 pull-right">
+						<div class="input-group" id="group">
+							<input type="text" class="form-control" placeholder="请输入地点。。。"
+								id="mlocation"> 
+						
+<div id="mstatus">
+ <select class="form-control" id="selectstatus">
+  <option value="" selected="selected">所有</option>
+  <option value="1">已处理</option>
+  <option value="0">未处理</option>
+</select>
+</div>
+<input type="text" class="form-control" placeholder="请输入用户id。。。"
+								id="uid"> 
+							<div class="input-group-btn">
+								<!-- Button and dropdown menu -->
+
+								<button type="button" class="btn btn-default dropdown-toggle"
+									data-toggle="dropdown" aria-expanded="false">
+									<span id="searchItem">地点</span> <span class="caret"></span> <span
+										class="sr-only">Toggle Dropdown</span>
+								</button>
+								<button type="button" class="btn btn-default"
+									onclick="searchAlarms()">查询</button>
+								<ul class="dropdown-menu dropdown-menu-right" role="menu">
+									<li><a href="JavaScript:void(0);"
+										onclick="showAlarmInput(mlocation)">地点</a>
+									</li>
+									<li class="divider"></li>
+									<li><a href="JavaScript:void(0);"
+										onclick="showAlarmInput(mstatus)">处理状态</a>
+									</li>
+									<li class="divider"></li>
+									<li><a href="JavaScript:void(0);"
+										onclick="showAlarmInput(uid)">用户id</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+               <br>
+				<div class="panel  panel-primary">
+					<!-- Default panel contents -->
+					<div class="panel-heading">报警信息</div>
+
+					<!-- Table -->
+					<table class="table table-hover table-bordered table-striped">
+						<thead class="table_header">
+							<tr>
+								<td>id</td>
+								<td>用户id</td>
+								<td>报警时间</td>
+								<td>消息</td>
+								<td>地区</td>
+								<td>处理状态</td>
+								<td>处理结果</td>
+								<td>视频</td>
+							</tr>
+						</thead>
+						<tbody class="text-center" id="messages">
+
+						</tbody>
+						<tfoot>
+						</tfoot>
+					</table>
+				</div>
+				<div class="row">
+
+					<div class="col-md-6 pages">
+						查询结果共：<span id="totalCount"></span>条&emsp; 当前为:<span
+							id="currentPage"></span>页&emsp; 共<span id="allPage"></span>页
+						&emsp;
+						<!--  
+						<input type="text" id="toPage" style="width:30px;"
+							class="inputPage"
+							onkeyup="this.value=this.value.replace(/[^\d]/g,'')" />
+<input type="button" value="Go" class="btn btn-default btn-sm" onclick="goPage();"/>-->
+					</div>
+					<!-- 翻页 -->
+					<div class="col-md-6">
+
+						<ul class="pagination" id="msgPage">
+
+						</ul>
+
+
+
+					</div>
+				</div>
+
+			</div>
+			<!--  /. PAGE INNER  -->
+		</div>
+		<!-- /. PAGE WRAPPER  -->
+	</div>
+	<div class="modals">
+		<div class="modal fade in" id="videoModal" tabindex="-1"
+				role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content modalContent">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title">报警视频</h4>
+						</div>
+						<div class="modal-body">
+
+
+							<video controls="controls"
+								
+								id="videoSrc" class="embed-responsive-item" width="100%">
+								<source
+									src=""
+									type="video/mp4"></source>
+
+							</video>
+
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="closeModal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	<!-- /. WRAPPER  -->
+	<div id="footer-sec">Copyright ©2016. n 江科大入侵报警团队 Software All
+		Rights Reserved.</div>
+	<!-- /. FOOTER  -->
+
+
+
+
+</body>
+</html>

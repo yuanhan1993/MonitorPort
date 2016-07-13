@@ -1,0 +1,78 @@
+ body{
+     background: #f2f4f6;
+    }
+      .navbar-inverse{
+       background: #438EB9;
+       border-color: #438EB9;
+      }
+      .navbar-inverse .navbar-nav > li > a {
+      color: #fff;
+      }
+      .navbar-inverse .mynav > li > a:hover,
+      .navbar-inverse .mynav > li > a:focus {
+      color: #fff;
+      background-color:#43B9B4;
+      }
+      .navbar-inverse .mynav > .active > a,
+      .navbar-inverse .mynav > .active > a:hover,
+      .navbar-inverse .mynav > .active > a:focus {
+      color: #fff;
+      background-color: #43B9B4;
+      }
+     .navbar-inverse .mynav > .disabled > a,
+     .navbar-inverse .mynav > .disabled > a:hover,
+     .navbar-inverse .mynav > .disabled > a:focus {
+      color: #444;
+      background-color: #43B9B4;
+     }
+    @media (max-width: 767px) {
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: #43B9B4;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu .divider {
+    background-color: #43B9B4;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #fff;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #fff;
+    background-color: #43B9B4;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #43B9B4;
+  }
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
+  }
+}
+.userManag{
+background-color: green;
+}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  color: #fff;
+  background-color: green;
+}
+     .content{
+      margin-top:50px;
+      height:auto !important;
+      min-height:200px;
+      height:400px;
+      width:100%;
+      /*隐藏垂直滚动条*/
+      overflow-y: hidden;
+      overflow-x: auto;
+     }
+.modalContent{
+   /*background:#f2f4f6;*/
+   color:#43B9B4;
+   }

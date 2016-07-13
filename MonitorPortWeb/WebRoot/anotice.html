@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>管理系统</title>
+
+<!-- BOOTSTRAP STYLES-->
+<link href="./css/bootstrap.css" rel="stylesheet" />
+<!-- FONTAWESOME STYLES-->
+<link href="./css/font-awesome.css" rel="stylesheet" />
+<!--CUSTOM BASIC STYLES-->
+<link href="./css/basic.css" rel="stylesheet" />
+<!--CUSTOM MAIN STYLES-->
+<link href="./css/custom.css" rel="stylesheet" />
+<link href="./css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="./css/bootstrap-datetimepicker.css" rel="stylesheet" />
+<style type="text/css">
+.navbar-brand {
+	color: #fff;
+}
+
+.navbar-default .navbar-brand {
+	color: #fff;
+}
+
+.navbar-default .navbar-brand:hover,.navbar-default .navbar-brand:focus
+	{
+	color: #fff;
+	background-color: transparent;
+}
+</style>
+<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+<!-- JQUERY SCRIPTS -->
+<script src="./js/jquery.js"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="./js/bootstrap.js"></script>
+<!-- METISMENU SCRIPTS -->
+<script src="./js/jquery.metisMenu.js"></script>
+<!-- CUSTOM SCRIPTS -->
+<script src="./js/custom.js"></script>
+<script type="text/javascript" src="./js/jBootstrapPage.js"></script>
+<script type="text/javascript" src="./js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="./js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="./js/util.js"></script>
+<script src="./js/index.js"></script>
+<script src="./js/anotice.js"></script>
+<script src="./js/cookie_util.js"></script>
+<style type="text/css">
+.table_header {
+	text-align: center;
+}
+
+.table_header td {
+	background: #DCE9F2;
+	padding: 5px 10px;
+	color: rgb(70, 122, 167);
+	border-top: 1px solid #CBD6DE;
+	border-bottom: 1px solid #ADBECB;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.inputPage {
+	width: 34px;
+	height: 28px;
+}
+
+.pages {
+	color: #666666;
+}
+
+.modalcolor {
+	color: #337AB7;
+}
+</style>
+<script type="text/javascript">
+	var isSearch = false;
+	$(function() {
+		indexFns();
+		anoticeFns();
+	});
+	
+</script>
+</head>
+<body ng-controller="mainController">
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-cls-top " role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="index.html">入侵报警系统管理系统</a>
+			</div>
+			<div class="header-right">
+				<div class="dropdown">
+
+					<!--  
+				<a href="#adminmenu" class="btn btn-info dropdown-toggle"
+					title="Logout" data-toggle="dropdown"><i
+					class="glyphicon glyphicon-user"></i>
+				</a>
+				-->
+					<button class="btn btn-info dropdown-toggle" data-toggle="dropdown"
+						id="adminmenu" aria-expanded="true">
+						<i class="glyphicon glyphicon-user"></i>
+					</button>
+
+					<ul class="dropdown-menu dropdown-menu-right" role="menu"
+						aria-labelledby="adminmenu">
+						<li><a href="JavaScript:void(0);" onclick="aLogOut()">安全退出</a></li>
+					</ul>
+				</div>
+
+			</div>
+
+		</nav>
+		<!-- /. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					<li><a href="usercheck.html"><i
+									class="glyphicon glyphicon-eye-open"></i>用户审核</a></li>
+							<li><a href="userall.html" ><i
+									class="glyphicon glyphicon-sunglasses"></i>所有用户</a></li>
+							<li><a href="userimport.html"><i
+									class="glyphicon glyphicon-star"></i>重点用户</a></li>
+						
+					
+						
+							<li><a href="question.html"><i
+									class="glyphicon glyphicon-hand-right"></i>用户反馈</a></li>
+							<li><a href="anotice.html" class="active-menu"><i
+									class="glyphicon glyphicon-bullhorn "></i>公告管理</a></li>
+							<li><a href="alarmmsgs.html" ><i
+									class="glyphicon glyphicon-hand-right"></i>报警信息</a></li>
+				</ul>
+
+			</div>
+
+		</nav>
+		<!-- /. NAV SIDE  -->
+		<div id="page-wrapper">
+
+			<div id="page-inner">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="page-head-line">公告管理</h1>
+						<h1 class="page-subhead-line">所有公告</h1>
+					</div>
+				</div>
+				<!-- /. ROW  -->
+				<div class="row">
+				<div class="col-md-4 pull-left">
+				   <input type="button" class="btn btn-info" value="增加公告"
+				   data-toggle="modal" data-target="#addnoticeModal"/>
+				</div>
+					<div class="col-md-4 pull-right">
+						<div class="input-group" id="group">
+							<input type="text" class="form-control" placeholder="请输入标题。。。"
+								id="ntitle"> 
+						<!-- <input type="text" class="form-control"
+								placeholder="请选择是否已发布" id="nflag"> -->
+<div id="nflag">
+ <select class="form-control" id="selectFlag">
+  <option value="" selected="selected">所有</option>
+  <option value="1">是</option>
+  <option value="0">否</option>
+</select>
+</div>
+							<div class="input-group-btn">
+								<!-- Button and dropdown menu -->
+
+								<button type="button" class="btn btn-default dropdown-toggle"
+									data-toggle="dropdown" aria-expanded="false">
+									<span id="searchItem">标题</span> <span class="caret"></span> <span
+										class="sr-only">Toggle Dropdown</span>
+								</button>
+								<button type="button" class="btn btn-default"
+									onclick="searchNotice()">查询</button>
+								<ul class="dropdown-menu dropdown-menu-right" role="menu">
+									<li><a href="JavaScript:void(0);"
+										onclick="showInput(ntitle)">标题</a>
+									</li>
+									<li class="divider"></li>
+									<li><a href="JavaScript:void(0);"
+										onclick="showInput(nflag)">是否发布</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+               <br>
+				<div class="panel  panel-primary">
+					<!-- Default panel contents -->
+					<div class="panel-heading">所有公告</div>
+
+					<!-- Table -->
+					<table class="table table-hover table-bordered table-striped">
+						<thead class="table_header">
+							<tr>
+								<td>id</td>
+								<td>公告名</td>
+								<td>简述</td>
+								<td>发布时间</td>
+								<td>是否发布</td>
+								<td>发布者</td>
+								<td>操作</td>
+							</tr>
+						</thead>
+						<tbody class="text-center" id="notices">
+
+						</tbody>
+						<tfoot>
+						</tfoot>
+					</table>
+				</div>
+				<div class="row">
+
+					<div class="col-md-6 pages">
+						查询结果共：<span id="totalCount"></span>条&emsp; 当前为:<span
+							id="currentPage"></span>页&emsp; 共<span id="allPage"></span>页
+						&emsp;
+						<!--  
+						<input type="text" id="toPage" style="width:30px;"
+							class="inputPage"
+							onkeyup="this.value=this.value.replace(/[^\d]/g,'')" />
+<input type="button" value="Go" class="btn btn-default btn-sm" onclick="goPage();"/>-->
+					</div>
+					<!-- 翻页 -->
+					<div class="col-md-6">
+
+						<ul class="pagination" id="userallPage">
+
+						</ul>
+
+
+
+					</div>
+				</div>
+
+			</div>
+			<!--  /. PAGE INNER  -->
+		</div>
+		<!-- /. PAGE WRAPPER  -->
+	</div>
+	<div class="modals">
+		<div class="modal fade in modalcolor" id="noticeModal" tabindex="-1"
+			role="dialog" aria-labelledby="userallModal" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="nmodalTitle">详细信息</h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-danger hide" id="warning-pwd">
+							<p id="warning_pwdmsg"></p>
+						</div>
+						<div class="formGroup" id="noticeForm">
+							<label> id </label> <input type="text" class="form-control"
+								id="alert_nid" readOnly> <label> 标题 </label> <input
+								type="text" class="form-control" id="alert_ntitle">
+								 <label>
+								简介 </label>
+					
+								 <textarea class="form-control" rows="3" id="alert_nshortContent"></textarea>
+							<label> 内容 </label>
+								 <textarea class="form-control" rows="3" id="alert_ncontent"></textarea>
+								 <label> 开始日期 </label> <input type="text"
+								class="form-control" id="alert_startDate" readonly> <label>
+								结束日期</label> <input type="text" class="form-control" id="alert_endDate" readonly>
+							<label> 发布日期</label> <input type="text" class="form-control"
+								id="alert_npublishDate" readonly> 
+								<label> 是否发布 </label> 
+								<select class="form-control" id="alert_nflag">
+  <option value="1">是</option>
+  <option value="0">否</option>
+</select>
+								<label> 发布者 </label> <input type="text"
+								class="form-control" id="alert_npublisher">
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="closeModal">关闭</button>
+						<button type="button" class="btn btn-success" id="toChange" onclick="modifyNotice()">提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 增加公告表单 -->
+		<div class="modal fade in modalcolor" id="addnoticeModal" tabindex="-1"
+			role="dialog" aria-labelledby="addnoticeModal" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="nmodalTitle">增加公告</h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-danger hide" id="warning-pwd">
+							<p id="warning_pwdmsg"></p>
+						</div>
+						<div class="formGroup" id="addnoticeForm">
+							    <label> 标题 </label> <input
+								type="text" class="form-control" id="add_ntitle" maxlength="10">
+								 <label>
+								简介 </label>
+								 <textarea class="form-control" rows="3" id="add_nshortContent" maxlength="140"></textarea>
+							<label> 内容 </label>
+								 <textarea class="form-control" rows="3" id="add_ncontent" maxlength="500"></textarea>
+								 <label> 开始日期 </label> <input type="text"
+								class="form-control" id="add_startDate" readonly> <label>
+								结束日期</label> <input type="text" class="form-control" id="add_endDate" readonly>
+							<label> 发布日期</label> <input type="text" class="form-control"
+								id="add_npublishDate" readonly> 
+								<label> 是否发布 </label> 
+								<select class="form-control" id="add_nflag">
+  <option value="1">是</option>
+  <option value="0">否</option>
+</select>
+								<label> 发布者 </label> <input type="text"
+								class="form-control" id="add_npublisher">
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							id="closeModal">关闭</button>
+						<button type="button" class="btn btn-success" id="toAdd" onclick="addNotice()">提交</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="modal fade in modalcolor" id="delNoticeModal" tabindex="-1"
+			role="dialog" aria-labelledby="delNoticeModal" aria-hidden="true" style="color:#f00">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">确认框</h4>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" class="hideid" /> 确认删除？
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-danger" onclick="delNotice()">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /. WRAPPER  -->
+	<div id="footer-sec">Copyright ©2016. n 江科大入侵报警团队 Software All
+		Rights Reserved.</div>
+	<!-- /. FOOTER  -->
+
+
+
+
+</body>
+</html>

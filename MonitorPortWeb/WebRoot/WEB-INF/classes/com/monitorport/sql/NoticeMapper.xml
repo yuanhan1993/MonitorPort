@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.monitorport.dao.NoticeDao">
+<select id="showNotice" parameterType="com.monitorport.entity.Page" resultType="com.monitorport.entity.Notice">
+  select * from m_notice
+   <where>
+  1=1
+   <if test="n_title!=null and n_title!=''">
+         and n_title like '%${n_title}%'
+   </if>
+   <if test="n_flag!=null and n_flag!=''">
+         and n_flag =${n_flag}
+   </if>
+   <if test="nowDate!=null and nowDate!=''">
+         and n_startDate &lt;=#{nowDate}
+   </if>
+   <if test="nowDate!=null and nowDate!=''">
+         and n_endDate &gt;=#{nowDate}
+   </if>
+  </where>
+  limit #{startNum},#{pageSize}
+</select>
+<select id="getNoticeCount" parameterType="String" resultType="int">
+  select count(n_id) from m_notice
+   <where>
+  1=1
+   <if test="n_title!=null and n_title!=''">
+         and n_title like '%${n_title}%'
+   </if>
+   <if test="n_flag!=null and n_flag!=''">
+         and n_flag =${n_flag}
+   </if>
+   <if test="nowDate!=null and nowDate!=''">
+         and n_startDate &lt;=#{nowDate}
+   </if>
+   <if test="nowDate!=null and nowDate!=''">
+         and n_endDate &gt;=#{nowDate}
+   </if>
+  </where>
+</select>
+<select id="findNoticeById" parameterType="String" resultType="com.monitorport.entity.Notice">
+  select * from m_notice
+  where n_id=#{n_id}
+</select>
+<update id="updateNotice" parameterType="com.monitorport.entity.Notice">
+  update m_notice
+  set n_title=#{n_title},
+      n_shortContent=#{n_shortContent},
+      n_content=#{n_content},
+      n_startDate=#{n_startDate},
+      n_endDate=#{n_endDate},
+      n_publishDate=#{n_publishDate},
+      n_publisher=#{n_publisher},
+      n_flag=#{n_flag}
+   where n_id=#{n_id}
+</update>
+<delete id="delNotice" parameterType="String">
+  delete from m_notice
+  where n_id=#{n_id}
+</delete>
+<insert id="addNotice" parameterType="com.monitorport.entity.Notice">
+  insert into m_notice
+  (n_title,n_shortContent,n_content,n_startDate,n_endDate,n_publishDate,n_publisher,n_flag)
+  values(#{n_title},#{n_shortContent},#{n_content},#{n_startDate},#{n_endDate},#{n_publishDate},#{n_publisher},#{n_flag})
+</insert>
+</mapper>

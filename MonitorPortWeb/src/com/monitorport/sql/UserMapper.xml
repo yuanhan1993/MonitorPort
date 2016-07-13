@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.monitorport.dao.UserDao">
+<!-- 根据用户名找到用户 -->
+  <select id="findByName" parameterType="String" resultType="com.monitorport.entity.User">
+    select * from m_user
+    where u_name=#{u_name}
+  </select>
+<!-- 根据id找到用户 -->  
+  <select id="findById" parameterType="String" resultType="com.monitorport.entity.User">
+    select * from m_user
+    where u_id=#{u_id}
+  </select>
+<!-- 根据页码信息显示用户 -->
+<select id="showUsers" parameterType="com.monitorport.entity.Page" resultType="com.monitorport.entity.User">
+    select * from m_user
+    <where>
+      1=1
+      <if test="u_id!=null and u_id!=''">
+         and u_id =#{u_id}
+      </if>
+      <if test="u_checked!=null and u_checked!=''">
+         and u_checked =#{u_checked}
+      </if>
+      <if test="u_location!=null and u_location!=''">
+         and u_location like '%${u_location}%'
+      </if>
+      <if test="u_realName!=null and u_realName!=''">
+         and u_realName like '%${u_realName}%'
+      </if>
+       <if test="u_phone!=null and u_phone!=''">
+         and u_phone =#{u_phone}
+      </if>
+      <if test="u_hasflag!=null and u_hasflag!=''">
+         and u_hasflag =#{u_hasflag}
+      </if>
+    </where>
+     order by u_id DESC
+     <if test="pageSize!=0">
+         limit #{startNum},#{pageSize}
+      </if>
+    
+  </select>
+ <!-- 查询用户数目 -->
+ <select id="getUserCount" parameterType="com.monitorport.entity.Page" resultType="int">
+    select count(u_id) from m_user
+    <where>
+      1=1
+      <if test="u_id!=null and u_id!=''">
+         and u_id =#{u_id}
+      </if>
+      <if test="u_checked!=null and u_checked!=''">
+         and u_checked =#{u_checked}
+      </if>
+      <if test="u_location!=null and u_location!=''">
+         and u_location like '%${u_location}%'
+      </if>
+      <if test="u_realName!=null and u_realName!=''">
+         and u_realName like '%${u_realName}%'
+      </if>
+       <if test="u_phone!=null and u_phone!=''">
+         and u_phone =#{u_phone}
+      </if>
+      <if test="u_hasflag!=null and u_hasflag!=''">
+         and u_hasflag =#{u_hasflag}
+      </if>
+    </where>
+  </select>
+<!-- 更新用户登录信息 -->
+<update id="updUserLogin" parameterType="com.monitorport.entity.User">
+   update m_user
+   set
+     u_loginTime=#{u_loginTime},
+     u_loginCount=#{u_loginCount}
+   where u_id=#{u_id}
+</update>
+<!-- 同意新用户的注册申请 -->
+<update id="agreeNewUser" parameterType="String">
+   update m_user
+   set
+    u_checked=0
+   where u_id=#{u_id}
+</update>
+<!-- 更新密码 -->
+<update id="updUserPwd" parameterType="com.monitorport.entity.User">
+   update m_user
+   set
+   u_password=#{u_password}
+   where u_id=#{u_id}
+</update>
+  <!-- 保存新用户信息 -->
+  <insert id="save" parameterType="com.monitorport.entity.User">
+    insert into m_user
+    (u_name,u_password,u_phone,u_mail,u_desc,u_location,u_realName) 
+    values(#{u_name},#{u_password},#{u_phone},#{u_mail},#{u_desc},#{u_location},#{u_realName})
+  </insert>
+  <!-- 保存更新的用户信息 -->
+  <insert id="insertUpdUser" parameterType="com.monitorport.entity.UserForUpd">
+    insert into m_user_upcheck
+    (u_id,u_name,up_realName,up_phone,up_mail,up_location,up_checked) 
+    values(#{u_id},#{u_name},#{up_realName},#{up_phone},#{up_mail},#{up_location},#{up_checked})
+  </insert>
+  <!--根据用户id 查找更新审核 -->
+   <select id="findUpdByUId" parameterType="String" resultType="com.monitorport.entity.UserForUpd">
+    select * from m_user_upcheck
+    where u_id=#{u_id}
+  </select>
+  <!-- 删除用户 -->
+  <delete id="delUser" parameterType="String">
+    delete from m_user
+    where u_id=#{u_id}
+  </delete>
+  <update id="insertFlag" parameterType="com.monitorport.entity.User">
+    update  m_user
+    set u_hasflag=#{u_hasflag},
+    u_flagReason=#{u_flagReason}
+    where u_id=#{u_id}
+  </update>
+  <!-- 用户更新请求 -->
+  <select id="showUpUser" parameterType="com.monitorport.entity.Page" resultType="com.monitorport.entity.UserForUpd">
+    select * from m_user_upcheck
+    where up_checked=1
+    limit #{startNum},#{pageSize}
+  </select>
+  <!-- 同意用户更新 -->
+  <update id="agreeUpUser" parameterType="String">
+   update m_user_upcheck
+   set
+    up_checked=0
+   where u_id=#{u_id}
+</update>
+<!-- 同意用户更新 -->
+<select id="getUpCount" resultType="int">
+   select count(up_id) from m_user_upcheck
+    where up_checked=1
+</select>
+<!-- 更新用户信息 -->
+<update id="updUser" parameterType="com.monitorport.entity.UserForUpd">
+  update m_user
+  set u_name=#{up_name},
+  u_realName=#{up_realName},
+  u_phone=#{up_phone},
+  u_mail=#{up_mail},
+  u_location=#{up_location}
+  where up_id=#{up_id}
+</update>
+<!-- 查找管理员，检查管理员登录 -->
+<select id="findAdmin" parameterType="com.monitorport.entity.Admin" resultType="com.monitorport.entity.Admin">
+  select * from m_admin
+  where a_username=#{a_username}
+  and a_password=#{a_password}
+</select>
+</mapper>

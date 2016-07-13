@@ -1,0 +1,99 @@
+<!doctype html> 
+<html> 
+<head> 
+  <meta charset="utf-8" /> 
+  <title>注册</title> 
+  <!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/background.css" media="screen" type="text/css" />
+  <link rel="stylesheet" href="./css/regist.css" media="screen" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+  <style type="text/css">
+   
+  </style>
+  <script type='text/javascript' src='./js/jquery.js'></script>
+  <script type='text/javascript' src='./js/regist.js'></script>
+  <script type='text/javascript'>
+  
+  </script>
+  
+</head> 
+
+<body>
+<div id="bgd2" class="bgd2">
+</div>
+<div id="particles">
+
+<div class="intro">
+	
+<div class='container'>
+
+<!-- / Form -->
+<form>
+<!-- / Header -->
+
+<!-- / Fieldset Alpha -->
+<fieldset class='alpha'>
+<div class="signin-head"><b>入侵报警系统注册</b></div>	
+<legend><b>1.</b>用户名密码</legend>
+<div class='frow'>
+<input class='item' placeholder='用户名' type='text' id="r_name" name="u_name">
+</div>
+
+<div class='frow'>
+<input class='item' placeholder='密码' type='password' id="r_pwd" name="u_password" >
+</div>
+
+<div class='frow'>
+<input class='item' placeholder='确认密码' type='password' id="pwd_re" >
+</div>
+<div class='frow'>
+<a class='backLogin' href='login.html'>返回登录页</a>
+</div>
+<div class='frow'>
+<a class='next-step' href='JavaScript:void(0);'>下一页</a>
+</div>
+</fieldset>
+<!-- / Fieldset Beta -->
+<fieldset class='beta'>
+<legend><b>2.</b>基本信息</legend>
+<div class='frow'>
+<input class='item' placeholder='邮箱' type='email' id="r_mail" name="u_mail" required oninvalid="setCustomValidity('必须填写！');" oninput="setCustomValidity('');">
+</div>
+<div class='frow'>
+<input class='item' placeholder='手机' required='required' type='phone' id="r_phone" name="u_phone">
+</div>
+<div class='frow'>
+<input class='item' placeholder='真实姓名' required='required' type='text' id="r_realName" name="u_realName">
+</div>
+<div class='frow'>
+<input class='item' placeholder='籍贯' required='required' type='text' id="r_location" name="u_location">
+</div>
+<div class='frow'>
+ 
+<textarea class='item'  id="desc" placeholder='备注(选填)'></textarea>
+
+</div>
+<div class='frow'>
+<a class='prev-step' href='JavaScript:void(0);'>返回</a>
+</div>
+<div class='frow'>
+<input class='btn btn-info'  id="regist" value="注册">
+</div>
+</fieldset>
+<!-- / Fieldset Charlie -->
+<fieldset class='charlie'>
+<legend><b>3.</b>填写完毕</legend>
+<div class='frow'>
+
+<a class='' href='login.html'>谢谢！等待管理员审核</a>
+</div>
+</fieldset>
+</form>
+</div>
+</div>
+</div>
+</body> 
+</html> 

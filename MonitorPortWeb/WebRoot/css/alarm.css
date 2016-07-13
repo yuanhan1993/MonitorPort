@@ -1,0 +1,74 @@
+ body{
+     background: #f2f4f6;
+    }
+      .navbar-inverse{
+       background: #438EB9;
+       border-color: #438EB9;
+      }
+      .navbar-inverse .navbar-nav > li > a {
+      color: #fff;
+      }
+      .navbar-inverse .mynav > li > a:hover,
+      .navbar-inverse .mynav > li > a:focus {
+      color: #fff;
+      background-color:#43B9B4;
+      }
+      .navbar-inverse .mynav > .active > a,
+      .navbar-inverse .mynav > .active > a:hover,
+      .navbar-inverse .mynav > .active > a:focus {
+      color: #fff;
+      background-color: #43B9B4;
+      }
+     .navbar-inverse .mynav > .disabled > a,
+     .navbar-inverse .mynav > .disabled > a:hover,
+     .navbar-inverse .mynav > .disabled > a:focus {
+      color: #444;
+      background-color: #43B9B4;
+     }
+     .content{
+      margin-top:50px;
+      height:auto !important;
+      min-height:540px;
+      height:540px;
+      width:100%;
+     }
+     .homemsg{
+      
+      margin-top:10px;
+      height:150px;
+     }
+     #page-end{
+     margin-top:2px;
+     border-top:1px solid #ccc;
+     }
+    #searchgroup{
+     padding-top:10px;
+     padding-bottom: 10px;
+    }
+    #test div a img{
+     height:auto !important;
+     max-height:180px;
+     height:180px;
+    }
+    .tip{
+     position:absolute;
+     width:84%;
+     background:url(../images/1px.png) repeat;
+     color:#fff;
+     bottom:9%;
+     left:8%;
+    }
+    #videoShow{
+     display: none;
+     overflow:auto;
+    }
+    .userManag{
+background-color: green;
+}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  color: #fff;
+  background-color: green;
+}
+ 

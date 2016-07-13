@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0" />
+<title>登录页面</title>
+
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="./css/login.css" />
+<link href="./css/background.css" rel="stylesheet">
+<style type="text/css">
+
+</style>
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/bootstrap.js"></script>
+<script type="text/javascript" src="./js/login.js"></script>
+<script type="text/javascript" src="./js/cookie_util.js"></script>
+<script type="text/javascript">
+$(function(){
+   showForm();
+  $('[data-toggle="popover"]').popover();
+  $(".addonbg").click(function(){
+   showRem();
+  });
+  
+  //登录
+  
+            var name=window.localStorage.getItem("remembername");
+            var remember=window.localStorage.getItem("remember");      
+            document.getElementById("rememberme").checked=remember;
+            if(name!=null){
+              $("#username").val(name);
+            }
+           // $("#form1").submit(login); 
+            $("#login").click(function(){
+              login();
+            });
+
+});
+function showRem(){
+ //alert($("#rememberme").attr("checked"));
+alert(document.getElementById("rememberme").checked);
+}
+ function showForm(){
+ $("#loginNameWarning").hide();
+ $("#loginPwdWarning").hide();
+        $("#form1").animate({"width":"300px"},1000).animate({"height":"350px"},1000);
+        $(".form-signin").fadeIn(2000);
+        }
+</script>
+</head>
+
+<body>
+ <div >
+        <div class="signin"  id="form1" >
+        
+	    <!--  <div class="signin-head"><img src="images/meinv.gif" alt="" class="img-circle"></div>
+	    -->
+	    <div class="signin-head"><b>入侵报警系统登录</b></div>
+	    <div class="form-signin">
+		<span class="glyphicon glyphicon-user">&nbsp;<span id="loginNameWarning">用户名不能为空！</span></span><input type="text" class="form-control" placeholder="用户名" required id="username"/>
+		
+		<span class="glyphicon glyphicon glyphicon-lock">&nbsp;<span id="loginPwdWarning">密码不能为空！</span></span><input type="password" class="form-control" placeholder="密码" required id="password"/>
+		
+		<button   id="login">登&nbsp;录</button>
+		
+		<div class="checkbox">
+			<input type="checkbox" value="remember-me" id="rememberme"> 记住我
+			&nbsp;&nbsp;&nbsp;<span >没有帐号？点击这里<a href="regist.html" >注册</a></span>
+		</div>
+		
+	</div>
+	
+    </div>
+    
+      </div>
+</body>
+
+</html>

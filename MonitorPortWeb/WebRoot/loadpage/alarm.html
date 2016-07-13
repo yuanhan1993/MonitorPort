@@ -1,0 +1,80 @@
+<div class="container">
+   <!-- 头部 -->
+      <div class="row">
+  <div class="col-lg-6">
+   <h3>最新报警视频</h3>
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+    <div class="input-group" id="searchgroup">
+      <input type="text" class="form-control" placeholder="请输入地点" id="slocation" >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="searchLocation()">搜索</button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+    <div class="videoList" id="videoList">
+      <div class="row" id="test">
+      </div>
+<!-- 翻页 -->
+<nav class="text-center">
+  <ul class="pagination" id="alarmPage">
+  </ul>
+</nav>
+</div>
+<div id="videoShow">
+<p>
+<a href="JavaScript:void(0);" id="goBack"><span class="glyphicon glyphicon-menu-left"></span>返回</a>
+<span class="pull-right">
+<a href="#dealModal" id="deal" data-toggle="modal">提交处理结果</a>
+<a href="http://localhost:8080/MonitorForUser/media/1/20160525194444.mp4" download="20160525194444.mp4">下载&nbsp;<span class="glyphicon glyphicon-save"></span></a>
+</span>
+
+</p>
+  
+  
+   <video  controls="controls" poster="http://localhost:8080/MonitorForUser/media/test.jpg" id="videoSrc" class="embed-responsive-item">
+         <source src="" type="video/mp4"></source>
+         <!--  <source src="./media/cars.ogg" type="video/ogg"></source>
+         <source src="./media/cars.webm" type="video/webm"></source>
+        <object data="./media/cars.mp4" >
+        <embed src="./media/cars.swf"/>
+        </object>-->
+   </video>
+   <div id="vdetail" class="text-center">
+     <p><span id="mlocation"></span>&nbsp;&nbsp;<span id="mtime"></span></p>
+     <p><span id="mmsg"></span>&nbsp;&nbsp;<span id="mresult"></span></p>
+   </div>
+</div>
+   
+</div>
+   <!-- 模态框 -->
+  <!-- Modal -->
+
+<div class="modal fade in" id="dealModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modalContent">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">处理结果</h4>
+      </div>
+      <div class="modal-body">
+      <input type="hidden" id="mid"/>
+      <div class="alert alert-danger hide" id="warning-deal">
+          <p id="warning_dealmsg"></p>
+      </div>
+         <div class="formGroup" id="dealForm">
+          <label>
+       处理结果
+       </label>
+      <textarea rows="3" class="form-control" placeholder="输入处理结果" id="dresult"></textarea>
+       </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeModal" onclick="closedealModal()">关闭</button>
+        <button type="button" class="btn btn-primary" id="dealmsg" onclick="dealMsg()">提交</button>
+      </div>
+    </div>
+  </div>
+</div> 
+     

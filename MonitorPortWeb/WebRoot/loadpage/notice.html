@@ -1,0 +1,100 @@
+   <div class="container">
+     <div class="tabs">
+    <ul id="myTab" class="nav nav-tabs" role="tablist">
+      <li class="active"><a href="#notices" role="tab" data-toggle="tab">公告消息</a></li>
+      <li><a href="#information" role="tab" data-toggle="tab" onclick="showQuestions()">您的消息</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade in active" id="notices">
+       <div class="noticeList">
+       </div>
+       <!-- 翻页 -->
+<nav class="text-center">
+  <ul class="pagination" id="noticePage">
+    
+  </ul>
+</nav>
+<div class="noticeDetail" id="detail">
+  <h3 class="text-center" id="ntitle"></h3>
+  <hr>
+  <div class="detail">
+     <p>尊敬的用户:</p>
+     <p>您好!</p>
+     <p id="ncontent">&nbsp;&nbsp;</p>
+     <p class="text-right" id="npublisher"></p>
+     <p class="text-right" id="npdate"></p>
+     <hr>
+     <div class="btns">
+       <nav>
+        <ul class="pager">
+        <li><a href="JavaScript:void(0);" id="backNotice">返回列表</a></li>
+       </ul>
+      </nav>
+     </div>
+  </div>
+</div>
+      </div>
+      <div class="tab-pane fade" id="information">
+      <div class="infos">
+      <!-- 
+       后续再开发此功能，时间不够喽。。。 
+      <p class="warningMsg bg-warning">您有<span class="badge mybadge">20</span>条未读消息</p>
+      -->
+      <p>您的消息(反馈，系统提示)</p>
+      <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#qModal">
+       我要反馈
+     </button>
+      <hr>  
+      <!-- 消息列表 -->
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      </div>
+      <!-- 翻页 -->
+<nav class="text-center">
+  <ul class="pagination" id="infoPage">
+    
+  </ul>
+</nav>
+      </div>  
+      </div>
+    </div>
+  </div>
+   </div>
+
+ <!-- 弹出窗口 -->
+ <div class="modal fade" id="qModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" id="myContent">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">留言板</h4>
+      </div>
+      <div class="modal-body">
+       <div class="formGroup">
+       <div class="alert alert-danger hide" id="qwarning">
+          <p id="qwarning_msg"></p>
+      </div>
+        <label>
+          标题
+       </label>
+       <input type="text" class="form-control" placeholder="输入标题" id="newTitle">
+       <br>
+        <label>
+          内容
+       </label>
+       <textarea rows="3" class="form-control" placeholder="输入内容" id="newContent"></textarea>
+       </div>
+       <!--  
+      <div class="checkbox">
+            <label>
+               <input type="checkbox"> 邮箱回复
+            </label>
+      </div>
+      -->
+       <p class="text-center"><button class="btn btn-success" onclick="submitQ()" id="subq">提交</button></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

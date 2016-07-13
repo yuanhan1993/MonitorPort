@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zn_CN" ng-app="scotchApp">
+<head>
+<title>主页</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- IE兼容 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="./css/index.css">
+<link rel="stylesheet" type="text/css" href="./css/home.css">
+
+<link rel="stylesheet" type="text/css" href="./css/notice.css">
+<link rel="stylesheet" type="text/css" href="./css/alarm.css">
+<!--  <link rel="stylesheet" type="text/css" href="./css/bootstrap-theme.css">-->
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/bootstrap.js"></script>
+<script type="text/javascript" src="./js/cookie_util.js"></script>
+<script type="text/javascript" src="./js/user.js"></script>
+<script type="text/javascript" src="./js/login.js"></script>
+
+<script type="text/javascript" src="./js/jBootstrapPage.js"></script>
+<script type="text/javascript" src="./js/alarm.js"></script>
+<script type="text/javascript" src="./js/notice.js"></script>
+
+<style type="text/css">
+.modalContent { /*background:#f2f4f6;*/
+	color: #43B9B4;
+}
+
+#videoSrc {
+	width: 100%;
+}
+
+#moreAlarm {
+	background-image: url(./images/more.png) no-repeat;
+}
+
+#home_message p {
+	min-width: 200px;
+}
+
+.vt {
+	margin-left: 10px;
+}
+.homemsg{
+background: #fff;
+}
+</style>
+</head>
+<script type="text/javascript">
+	//控制折叠
+	var isShow = false;
+	$(function() {
+	//判断是否是登录
+	if( window.localStorage.getItem("uid")==null){
+	   window.location.href="login.html";
+	}
+		//加载页面时执行的方法
+		//自己定义的折叠，可以自己动态控制
+		$('#navbartop').collapse("hide");
+		showHome();
+		//导航链接点击事件
+		$("#menu li a").click(function() {
+			if ($(this).parent().attr("class") == "active") {
+			} else {
+				var page = $(this).attr("id");
+				$("#menu li").removeClass();
+				$(this).parent().addClass("active");
+				$(".content").children().remove();
+				$(".content").load("loadpage/" + page + ".html", function() {
+					if (page == "alarm") {
+						alarmFns();
+					}
+					if (page == "home") {
+						homeFns();
+					}
+					if (page == "notice") {
+						noticeFns();
+					}
+				});
+
+				$(".content").children().hide();
+				$("#" + page + "div").show();
+
+			}
+			$("#navbartop").collapse('hide');
+			isShow = false;
+		});
+		//logo的点击事件
+		$("#logo").click(function() {
+			showHome();
+		});
+
+	});
+	//显示主页面
+	function showHome() {
+		$("#menu li").removeClass();
+		$("#home").parent().addClass("active");
+		$(".content").children().remove();
+		$(".content").load("loadpage/home.html", function() {
+			homeFns();
+		});
+		showHomeVideoList();
+		showHomeNoticeList();
+	}
+	//加载主页信息
+	function homeFns() {
+		$('[data-toggle="popover"]').popover();
+		showUser();
+		$('#userPwdModal').on('hidden.bs.modal', function(e) {
+			closepwdModal();
+		});
+		showHomeVideoList();
+		showHomeNoticeList();
+	}
+	//加载报警信息
+	function alarmFns() {
+		var cpage = 1;
+		createPagesByCount();
+		showVideoList(1);
+
+		$('#dealModal').on('hidden.bs.modal', function(e) {
+			closepwdModal();
+		});
+		$("#goBack").click(function() {
+		    closedealModal();
+			$("#videoShow").hide();
+			$("#videoList").fadeIn(200);
+			showVideoList(cpage);
+		});
+
+	}
+	//加载公告等信息
+	function noticeFns() {
+		$('#qModal').on('hidden.bs.modal', function(e) {
+			closeQModal();
+		});
+		//创建消息分页
+		createPagesCountForNotice();
+		//加载公告列表
+		showList(1);
+
+		$("#backNotice").on("click", function() {
+			goBackNotice();
+		});
+
+	}
+	function goBackNotice() {
+		$("#noticePage").show();
+		$(".noticeDetail").hide();
+		$(".noticeList").show();
+	}
+	//自定义折叠来控制折叠动作
+	function opencollpase() {
+		$('#navbartop').collapse('show');
+	}
+	function mycollapse() {
+		if (isShow == true) {
+			$('#navbartop').collapse("hide");
+			isShow = false;
+		} else {
+			$('#navbartop').collapse("show");
+			isShow = true;
+		}
+	}
+	function toAlarm() {
+		$("#menu li").removeClass();
+		$("#alarm").parent().addClass("active");
+		$(".content").children().remove();
+		$(".content").load("loadpage/alarm.html", function() {
+			alarmFns();
+		});
+	}
+	function toNotice(){
+	 $("#menu li").removeClass();
+		$("#notice").parent().addClass("active");
+		$(".content").children().remove();
+		$(".content").load("loadpage/notice.html", function() {
+			noticeFns();
+		});
+	}
+</script>
+<body>
+	<!-- 导航区域 -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" id="pmenu" class="navbar-toggle collapsed"
+					data-target="#navbartop" onclick="mycollapse()">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="JavaScript:void(0);" id="logo"> 
+				  
+				    <img alt="入侵报警" src="./images/logo6.png" height="35px"> </a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="navbartop">
+				<ul class="nav navbar-nav mynav" id="menu">
+					<li class="active"><a href="JavaScript:void(0);" id="home"><strong>主页</strong>
+					</a>
+					</li>
+					<li><a href="JavaScript:void(0);" id="alarm"><strong>最新报警</strong>
+					</a>
+					</li>
+					<li><a href="JavaScript:void(0);" id="notice"><strong>消息中心</strong>
+					</a>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right userManag">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-expanded="false"> <img
+							src="./images/head/head1.gif" alt="..." width="20" height="20"
+							class="img-circle"><span class="uname"></span> <span
+							class="caret"></span> </a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#userModal" id="userInfo" data-toggle="modal"><span
+									class="glyphicon glyphicon-user"></span>&nbsp;我的资料</a>
+							</li>
+							<li class="divider"></li>
+							<li><a href="#userPwdModal" id="revisePwd"
+								data-toggle="modal"><span class="glyphicon glyphicon-tag"></span>&nbsp;修改密码</a>
+							</li>
+							<li class="divider"></li>
+							<li><a href="JavaScript:void(0);" id="logOut"
+								onclick="logOut()"><span class="glyphicon glyphicon-off"></span>&nbsp;安全退出</a>
+							</li>
+
+						</ul></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<!-- 内容区域 -->
+	<div class="content"></div>
+	<!-- 所有弹窗 -->
+	<div class="modals">
+		<div class="alertUserInfo">
+			<!-- Modal -->
+			<div class="modal fade" id="userModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content modalContent">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">用户资料</h4>
+						</div>
+						<div class="modal-body">
+							<div class="alert alert-danger hide" id="warning-block">
+								<p id="warning_msg"></p>
+							</div>
+							<div class="formGroup" id="userInfoForm">
+								<label> 用户名 </label> <input type="text" class="form-control"
+									id="alert_name" disabled="disabled"> <br> <label>
+									真实姓名 </label> <input type="text" class="form-control"
+									id="alert_realName"> <label> 手机号 </label> <input
+									type="text" class="form-control" id="alert_phone"
+									maxlength="11"> <br> <label> 邮箱 </label> <input
+									type="email" class="form-control" id="alert_mail"> <label>
+									籍贯 </label> <input type="text" class="form-control" id="alert_location">
+							</div>
+
+							<!-- 隐藏内容 -->
+							<input type="text" id="hide_name" class="hidden"> <input
+								type="text" id="hide_id" class="hidden">
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary" id="updateUser"
+								onclick="reviseUserInfo()">修改资料</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="alertUserPwd">
+			<!-- Modal -->
+			<div class="modal fade in" id="userPwdModal" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content modalContent">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">密码修改</h4>
+						</div>
+						<div class="modal-body">
+							<div class="alert alert-danger hide" id="warning-pwd">
+								<p id="warning_pwdmsg"></p>
+							</div>
+							<div class="formGroup" id="userPwdForm">
+								<label> 原密码 </label> <input type="text" class="form-control"
+									id="alert_oldpwd"> <br> <label> 新密码 </label> <input
+									type="password" class="form-control" id="alert_newpwd">
+								<label> 确认密码 </label> <input type="password"
+									class="form-control" id="alert_confirmpwd"> <br>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="closeModal" onclick="closepwdModal()">关闭</button>
+							<button type="button" class="btn btn-primary" id="updatePwd"
+								onclick="revisePwd()">提交</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 视频弹出框 -->
+		<div class="homealarms">
+			<!-- Modal -->
+			<div class="modal fade in" id="homealarmModal" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content modalContent">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">报警信息</h4>
+						</div>
+						<div class="modal-body">
+							<div class="alert alert-danger hide" id="warning-pwd">
+								<p id="warning_pwdmsg"></p>
+							</div>
+
+							<video controls="controls"
+								
+								id="videoSrc" class="embed-responsive-item">
+								<source
+									src="http://localhost:8080/MonitorForUser/media/1/test2.mp4"
+									type="video/mp4"></source>
+
+							</video>
+							<div id="hvdetail" class="text-center">
+								<p>
+									<span id="hmlocation"></span>&nbsp;&nbsp;<span id="hmtime"></span>
+								</p>
+								<p>
+									<span id="hmmsg"></span>&nbsp;&nbsp;<span id="hmresult"></span>
+								</p>
+							</div>
+
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="closeModal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="homenotices">
+			<!-- Modal -->
+			<div class="modal fade in" id="homenoticeModal" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content modalContent">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">公告详情</h4>
+						</div>
+						<div class="modal-body">
+							<div class="homenoticeDetail">
+								<h3 class="text-center" id="hntitle"></h3>
+								<hr>
+								<div class="detail">
+									<p>尊敬的用户:</p>
+									<p>您好!</p>
+									<p id="hncontent">&nbsp;&nbsp;</p>
+									<p class="text-right" id="hnpublisher"></p>
+									<p class="text-right" id="hnpdate"></p>
+									<hr>
+								</div>
+							</div>
+
+
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" id="closeModal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="footer-bottom" id="page-end">
+		<ul class="list-inline text-center">
+			<li>Copyright ©2016. n 江科大入侵报警团队 Software All Rights Reserved.</li>
+		</ul>
+	</div>
+
+</body>
+</html>

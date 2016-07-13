@@ -1,0 +1,16 @@
+#Sun Jul 10 16:46:38 CST 2016
+eclipse.preferences.version=1
+encoding//WebRoot/js=UTF-8
+encoding//WebRoot/js/auser.js=UTF-8
+encoding//WebRoot/js/login.js=UTF-8
+encoding//WebRoot/js/notice.js=UTF-8
+encoding//WebRoot/js/regist.js=UTF-8
+encoding//src/com/monitorport/entity/Message.java=UTF-8
+encoding//src/com/monitorport/entity/MessageResult.java=UTF-8
+encoding//src/com/monitorport/entity/Notice.java=UTF-8
+encoding//src/com/monitorport/entity/Page.java=UTF-8
+encoding//src/com/monitorport/entity/User.java=UTF-8
+encoding//src/com/monitorport/entity/UserForUpd.java=UTF-8
+encoding//src/com/monitorport/service/MessageServiceImpl.java=UTF-8
+encoding//src/com/monitorport/service/UserService.java=UTF-8
+encoding//src/com/monitorport/service/UserServiceImpl.java=UTF-8

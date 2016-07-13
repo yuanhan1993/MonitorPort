@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.monitorport.dao.QuestionDao">
+<select id="findQByUId" parameterType="com.monitorport.entity.Page" resultType="com.monitorport.entity.Question">
+  select * from m_question
+  where u_id=#{u_id}
+  limit #{startNum},#{pageSize}
+</select>
+<select id="getQuestionCount" parameterType="String" resultType="Integer">
+ select count(r_id) from m_question
+ where
+ u_id=#{u_id}
+</select>
+<select id="findQByRId" parameterType="String" resultType="com.monitorport.entity.Question">
+  select * from m_question
+  where r_id=#{r_id}
+</select>
+<insert id="insertNewQuestion" parameterType="com.monitorport.entity.Question">
+   insert into m_question
+   (u_id,u_title,u_question,r_date)
+   values(#{u_id},#{u_title},#{u_question},#{r_date})
+</insert>
+<select id="showQuestion" parameterType="com.monitorport.entity.Page" resultType="com.monitorport.entity.Question">
+  select * from m_question
+   <where>
+  1=1
+   <if test="r_id!=null and r_id!=''">
+         and r_id =#{r_id}
+   </if>
+   <if test="u_title!=null and u_title!=''">
+         and u_title like '%${u_title}%'
+   </if>
+   <if test="r_flag!=null and r_flag!=''">
+         and r_flag =#{r_flag}
+   </if>
+  </where>
+  limit #{startNum},#{pageSize}
+</select>
+<select id="getSearchCount" parameterType="com.monitorport.entity.Question" resultType="Integer">
+ select count(r_id) from m_question
+  <where>
+  1=1
+   <if test="r_id!=null and r_id!=''">
+         and r_id =#{r_id}
+   </if>
+   <if test="u_title!=null and u_title!=''">
+         and u_title like '%${u_title}%'
+   </if>
+   <if test="r_flag!=null and r_flag!=''">
+         and r_flag =#{r_flag}
+   </if>
+  </where>
+</select>
+<insert id="addSystemQuestion" parameterType="com.monitorport.entity.Question">
+  insert into m_question
+  (u_id,u_title,u_question,r_answer,r_flag,r_responser,r_date)
+  values(#{u_id},#{u_title},#{u_question},#{r_answer},#{r_flag},#{r_responser},#{r_date})
+</insert>
+<update id="updQuestion" parameterType="com.monitorport.entity.Question">
+  update m_question
+  set r_answer=#{r_answer},
+  r_responser=#{r_responser},
+  r_flag=#{r_flag}
+  where r_id=#{r_id}
+</update>
+<delete id="delQuestion" parameterType="String">
+  delete from m_question
+  where r_id=#{r_id}
+</delete>
+</mapper>
