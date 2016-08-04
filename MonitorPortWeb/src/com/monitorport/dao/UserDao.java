@@ -9,107 +9,107 @@ import com.monitorport.entity.UserForUpd;
 
 public interface UserDao {
 /**
- * ¸ù¾İÓÃ»§ÃûÕÒµ½ÓÃ»§
+ * æ ¹æ®ç”¨æˆ·åæ‰¾åˆ°ç”¨æˆ·
  * @param u_name
  * @return
  */
 public User findByName(String u_name);
 /**
- * ¸ù¾İidÕÒµ½ÓÃ»§
+ * æ ¹æ®idæ‰¾åˆ°ç”¨æˆ·
  * @param u_id
  * @return
  */
 public User findById(String u_id);
 /**
- * ×ÛºÏ²éÕÒÓÃ»§
+ * ç»¼åˆæŸ¥æ‰¾ç”¨æˆ·
  * @param page
  * @return
  */
 public List<User> showUsers(Page page);
 /**
- * ²éÑ¯ÓÃ»§×ÜÊı
+ * æŸ¥è¯¢ç”¨æˆ·æ€»æ•°
  * @param page
  * @return
  */
 public int getUserCount(Page page);
 /**
- * ¸üĞÂÓÃ»§µÇÂ¼ĞÅÏ¢
+ * æ›´æ–°ç”¨æˆ·ç™»å½•ä¿¡æ¯
  * @param user
  * @return
  */
 public int updUserLogin(User user);
 /**
- * ±£´æĞÂÓÃ»§ĞÅÏ¢
+ * ä¿å­˜æ–°ç”¨æˆ·ä¿¡æ¯
  * @param user
  * @return
  */
 public int save(User user);
 /**
- * ¼ì²éÓÃ»§Ãû
+ * æ£€æŸ¥ç”¨æˆ·å
  * @param u_name
  */
 public void checkName(String u_name);
 /**
- * ²åÈëÓÃ»§¸ü¸ÄĞÅÏ¢
+ * æ’å…¥ç”¨æˆ·æ›´æ”¹ä¿¡æ¯
  * @param updUser
  * @return
  */
 public int insertUpdUser(UserForUpd updUser);
 /**
- * ¸ù¾İid²éÕÒÓÃ»§¸ü¸ÄĞÅÏ¢
+ * æ ¹æ®idæŸ¥æ‰¾ç”¨æˆ·æ›´æ”¹ä¿¡æ¯
  * @param u_id
  * @return
  */
 public List<UserForUpd> findUpdByUId(String u_id);
 /**
- * ĞŞ¸ÄÓÃ»§ÃÜÂë
+ * ä¿®æ”¹ç”¨æˆ·å¯†ç 
  * @param user
  * @return
  */
 public int updUserPwd(User user);
 /**
- * Í¬ÒâĞÂÓÃ»§µÄ×¢²á
+ * åŒæ„æ–°ç”¨æˆ·çš„æ³¨å†Œ
  * @param u_id
  * @return
  */
 public int agreeNewUser(String u_id);
 /**
- * É¾³ıÓÃ»§
+ * åˆ é™¤ç”¨æˆ·
  * @param u_id
  * @return 
  */
 public int delUser(String u_id);
 /**
- * ²åÈë±ê¼Ç
+ * æ’å…¥æ ‡è®°
  * @param user
  * @return
  */
 public int insertFlag(User user);
 /**
- * ÓÃ»§¸üĞÂÁĞ±í
+ * ç”¨æˆ·æ›´æ–°åˆ—è¡¨
  * @param page
  * @return
  */
 public List<UserForUpd> showUpUser(Page page);
 /**
- * ÓÃ»§¸üĞÂÊıÄ¿
+ * ç”¨æˆ·æ›´æ–°æ•°ç›®
  * @return
  */
 public int getUpCount();
 /**
- * Í¬ÒâÓÃ»§¸üĞÂ
+ * åŒæ„ç”¨æˆ·æ›´æ–°
  * @param u_id
  * @return
  */
 public int agreeUpUser(String u_id);
 /**
- * ¸üĞÂÓÃ»§ĞÅÏ¢
+ * æ›´æ–°ç”¨æˆ·ä¿¡æ¯
  * @param updUser
  * @return
  */
 public int updUser(UserForUpd updUser);
 /**
- * ²éÕÒ¹ÜÀíÔ±
+ * æŸ¥æ‰¾ç®¡ç†å‘˜
  * @param a
  * @return
  */

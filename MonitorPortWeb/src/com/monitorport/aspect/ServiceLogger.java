@@ -1,14 +1,14 @@
-package com.monitorport.aspect;
+锘縫ackage com.monitorport.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-@Component//扫描,将组件扫描到Spring容器
-@Aspect//将当前组件设置为切面组件
+@Component//鎵弿,灏嗙粍浠舵壂鎻忓埌Spring瀹瑰櫒
+@Aspect//灏嗗綋鍓嶇粍浠惰缃负鍒囬潰缁勪欢
 public class ServiceLogger {
 	@Before("within(com.monitor.service..*)")
 	public void slogger(){
 		
-		System.out.println("进入Service方法");
+		System.out.println("杩涘叆Service鏂规硶");
 	}
 }

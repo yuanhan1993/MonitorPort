@@ -27,7 +27,7 @@ public class UpdateNoticeController {
 	  MessageResult result=noticeService.updateNotice(n_id, n_title, n_shortContent, n_content, n_startDate, n_endDate, n_publishDate, n_publisher, n_flag);
 	  return result;
   }
-	//解决日期格式问题，如果不加会出现400错误
+	//瑙ｅ喅鏃ユ湡鏍煎紡闂锛屽鏋滀笉鍔犱細鍑虹幇400閿欒
 	@InitBinder  
 	public void initBinder(WebDataBinder binder) {  
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  

@@ -1,7 +1,7 @@
 package com.monitorport.service;
 import com.monitorport.entity.MessageResult;
 /**
- * 处理报警信息
+ * 澶勭悊鎶ヨ淇℃伅
  * @author yh
  *
  */

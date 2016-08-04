@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.monitorport.entity.MessageResult;
 import com.monitorport.service.UserService;
 /**
- * ÓÃ»§×¢²á
+ * ç”¨æˆ·æ³¨å†Œ
  * @author yh
  *
  */

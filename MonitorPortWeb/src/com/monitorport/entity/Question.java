@@ -3,14 +3,14 @@ package com.monitorport.entity;
 import java.util.Date;
 
 public class Question {
-private int r_id; //ĞòºÅ
-private int u_id; //ÓÃ»§id
-private String u_title; //ÎÊÌâ±êÌâ
-private String u_question; //ÎÊÌâÏêÇé
-private String r_answer; //»Ø´ğ
-private String r_flag; //±ê¼Ç
-private String r_responser; //»Ø´ğÕß
-private Date r_date; //ÈÕÆÚ
+private int r_id; //åºå·
+private int u_id; //ç”¨æˆ·id
+private String u_title; //é—®é¢˜æ ‡é¢˜
+private String u_question; //é—®é¢˜è¯¦æƒ…
+private String r_answer; //å›ç­”
+private String r_flag; //æ ‡è®°
+private String r_responser; //å›ç­”è€…
+private Date r_date; //æ—¥æœŸ
 public Date getR_date() {
 	return r_date;
 }

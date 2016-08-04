@@ -18,7 +18,7 @@ public class NoticeServiceImpl implements NoticeService{
     private NoticeDao noticeDao;
 	public MessageResult showNotice(String currentPage,String pageSize,String n_flag) {
 		MessageResult result=new MessageResult();
-		//暂时不做只在时间内范围显示的功能，所有公告都显示
+		//鏆傛椂涓嶅仛鍙湪鏃堕棿鍐呰寖鍥存樉绀虹殑鍔熻兘锛屾墍鏈夊叕鍛婇兘鏄剧ず
 		//Date date=new Date();
 		//SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		//String nowDate=sdf.format(date);

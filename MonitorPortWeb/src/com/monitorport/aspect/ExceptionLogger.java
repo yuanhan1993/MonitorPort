@@ -1,4 +1,4 @@
-package com.monitorport.aspect;
+ï»¿package com.monitorport.aspect;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -9,8 +9,8 @@ public class ExceptionLogger {
 	@AfterThrowing(throwing="ex",
 			pointcut="within(com.monitor.controller..*)")
 		public void log(Exception ex){
-			//½«Òì³£ĞÅÏ¢Ğ´ÈëÎÄ¼ş
-			System.out.println("¼ÇÂ¼Òì³£ĞÅÏ¢:"+ex);
+			//å°†å¼‚å¸¸ä¿¡æ¯å†™å…¥æ–‡ä»¶
+			System.out.println("è®°å½•å¼‚å¸¸ä¿¡æ¯:"+ex);
 			try{
 				FileWriter fw = 
 					new FileWriter("F:\\monitorweb_error.txt");
@@ -20,7 +20,7 @@ public class ExceptionLogger {
 			    out.close();
 			    fw.close();
 			}catch(Exception e){
-				System.out.println("¼ÇÂ¼Òì³£ĞÅÏ¢Ê§°Ü");
+				System.out.println("è®°å½•å¼‚å¸¸ä¿¡æ¯å¤±è´¥");
 			}
 			
 		}

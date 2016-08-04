@@ -8,10 +8,10 @@ import com.monitorport.entity.Page;
 
 public interface NoticeDao {
 
-public List<Notice> showNotice(Page page);//ÏÔÊ¾ËùÓĞ¹«¸æĞÅÏ¢
-public Notice findNoticeById(String n_id);//¸ù¾İid²éÑ¯ĞÅÏ¢
-public int getNoticeCount(Page page);//¹«¸æÊıÄ¿
-public int updateNotice(Notice notice);//¸üĞÂ
-public int delNotice(String u_id);//É¾³ı¹«¸æ
-public int addNotice(Notice notice);//Ôö¼Ó¹«¸æ
+public List<Notice> showNotice(Page page);//æ˜¾ç¤ºæ‰€æœ‰å…¬å‘Šä¿¡æ¯
+public Notice findNoticeById(String n_id);//æ ¹æ®idæŸ¥è¯¢ä¿¡æ¯
+public int getNoticeCount(Page page);//å…¬å‘Šæ•°ç›®
+public int updateNotice(Notice notice);//æ›´æ–°
+public int delNotice(String u_id);//åˆ é™¤å…¬å‘Š
+public int addNotice(Notice notice);//å¢åŠ å…¬å‘Š
 }

@@ -6,13 +6,13 @@ import com.monitorport.entity.Page;
 import com.monitorport.entity.Question;
 
 public interface QuestionDao {
-public List<Question> findQByUId(Page page);//¸ù¾İÓÃ»§id²éÕÒ·´À¡ÏûÏ¢
-public int insertNewQuestion(Question question);//²åÈëĞÂµÄ·´À¡ÏûÏ¢
-public int getQuestionCount(String u_id);//¸ù¾İu_id²éÕÒÎÊÌâÊıÄ¿
-public List<Question> showQuestion(Page page);//¸ù¾İÒ³ÂëÏÔÊ¾ËùÓĞĞÅÏ¢
-public int getSearchCount(Page page); //µÃµ½²éÕÒÎÊÌâµÄÊıÄ¿
-public Question findQByRId(String r_id);//¸ù¾İid²éÕÒÎÊÌâ
-public int addSystemQuestion(Question question);//Ôö¼ÓÏµÍ³·´À¡
-public int updQuestion(Question question);//¸üĞÂÎÊÌâ
-public int delQuestion(String r_id);//Èö»ÑÄê³õÎÊÌâ
+public List<Question> findQByUId(Page page);//æ ¹æ®ç”¨æˆ·idæŸ¥æ‰¾åé¦ˆæ¶ˆæ¯
+public int insertNewQuestion(Question question);//æ’å…¥æ–°çš„åé¦ˆæ¶ˆæ¯
+public int getQuestionCount(String u_id);//æ ¹æ®u_idæŸ¥æ‰¾é—®é¢˜æ•°ç›®
+public List<Question> showQuestion(Page page);//æ ¹æ®é¡µç æ˜¾ç¤ºæ‰€æœ‰ä¿¡æ¯
+public int getSearchCount(Page page); //å¾—åˆ°æŸ¥æ‰¾é—®é¢˜çš„æ•°ç›®
+public Question findQByRId(String r_id);//æ ¹æ®idæŸ¥æ‰¾é—®é¢˜
+public int addSystemQuestion(Question question);//å¢åŠ ç³»ç»Ÿåé¦ˆ
+public int updQuestion(Question question);//æ›´æ–°é—®é¢˜
+public int delQuestion(String r_id);//æ’’è°å¹´åˆé—®é¢˜
 }

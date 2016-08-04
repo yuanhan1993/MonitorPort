@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.monitorport.entity.MessageResult;
 /**
- * 处理公告信息
+ * 澶勭悊鍏憡淇℃伅
  * @author yh
  *
  */

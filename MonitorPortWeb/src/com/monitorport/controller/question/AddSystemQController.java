@@ -28,7 +28,7 @@ public class AddSystemQController {
 		MessageResult result=questionService.addSystemQuestion(u_id, u_title, u_question, r_answer, r_flag, r_responser, r_date);
 		return result;
 	}
-	//解决日期格式问题，如果不加会出现400错误
+	//瑙ｅ喅鏃ユ湡鏍煎紡闂锛屽鏋滀笉鍔犱細鍑虹幇400閿欒
 		@InitBinder  
 		public void initBinder(WebDataBinder binder) {  
 		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  

@@ -41,10 +41,10 @@ public class QuestionServiceImpl implements QuestionService{
 		int qc=questionDao.insertNewQuestion(q);
 		if(qc>0){
 			result.setState(0);
-			result.setMsg("提交成功，请耐心等待");
+			result.setMsg("鎻愪氦鎴愬姛锛岃鑰愬績绛夊緟");
 		}else{
 			result.setState(1);
-			result.setMsg("提交失败，请与管理员联系");
+			result.setMsg("鎻愪氦澶辫触锛岃涓庣鐞嗗憳鑱旂郴");
 		}
 		return result;
 	}

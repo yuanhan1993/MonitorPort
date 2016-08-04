@@ -6,20 +6,20 @@ import com.monitorport.entity.Message;
 import com.monitorport.entity.Page;
 
 public interface MessageDao {
- //±£´æĞÂÔöµÄĞÅÏ¢	
+ //ä¿å­˜æ–°å¢çš„ä¿¡æ¯	
  public void save(Message msg);
- //²éÑ¯ĞÅÏ¢µÄ×ÜÊı
+ //æŸ¥è¯¢ä¿¡æ¯çš„æ€»æ•°
  public int getCount(Page page);
- //ÏÔÊ¾ËùÓĞĞÅÏ¢
+ //æ˜¾ç¤ºæ‰€æœ‰ä¿¡æ¯
  public List<Message> showAll(Page page);
- //¸ù¾İID²éÕÒĞÅÏ¢
+ //æ ¹æ®IDæŸ¥æ‰¾ä¿¡æ¯
  public Message findById(String m_id);
- //É¾³ıËùÑ¡ĞÅÏ¢
+ //åˆ é™¤æ‰€é€‰ä¿¡æ¯
  public int deleteMessage(String m_id);
- //¸üĞÂËùÑ¡ĞÅÏ¢
+ //æ›´æ–°æ‰€é€‰ä¿¡æ¯
  public int updateMessage(Message mesage);
- //´¦ÀíÊÂ¼ş
+ //å¤„ç†äº‹ä»¶
  public int dealMessage(Message message);
- //²éÕÒËùÓĞĞÅÏ¢£¬ÓÃÀ´ÅĞ¶ÏÊÇ·ñÒÑ¾­´æÔÚ
+ //æŸ¥æ‰¾æ‰€æœ‰ä¿¡æ¯ï¼Œç”¨æ¥åˆ¤æ–­æ˜¯å¦å·²ç»å­˜åœ¨
  public List<Message> searchAll(String u_id);
 }
